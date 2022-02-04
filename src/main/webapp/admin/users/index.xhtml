@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Admin - Users</ui:define>
+  <ui:define name="body">
+	<div class="container-fluid my-3">
+	  <h1 class="display-4 text-center mb-3">Users</h1>
+	  <div class="table-responsive">
+		<h:form>
+		  <h:dataTable value="#{firebaseUserRepositoryImpl.getAllUsers()}" var="user"
+					   styleClass="table table-striped align-middle">
+			<h:column>
+			  <f:facet name="header">ID</f:facet>
+			  #{user.uid}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Display name</f:facet>
+			  <h:link value="#{user}" outcome="#{adminNavigation.userData}">
+				<f:param name="id" value="#{user.uid}" />
+			  </h:link>
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Email</f:facet>
+			  #{user.email}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Last login</f:facet>
+			  #{user.lastSignIn}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Account created</f:facet>
+			  #{user.accountCreationDate}
+			</h:column>
+		  </h:dataTable>
+		</h:form>
+	  </div>
+	</div>
+  </ui:define>
+</ui:composition>

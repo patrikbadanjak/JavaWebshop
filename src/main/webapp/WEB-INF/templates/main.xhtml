@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:head>
+	  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+	  <meta name="description" content="DuChan - Trusted for over 20 years" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	  <link rel="shortcut icon" type="image/x-icon" href="../../assets/media/images/favicon.svg" />
+
+	  <title><ui:insert name="title">Welcome</ui:insert></title>
+
+	  <!-- ========================= CSS here ========================= -->
+	  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
+	  <link rel="stylesheet" href="../../assets/css/LineIcons.3.0.css" />
+	  <link rel="stylesheet" href="../../assets/css/tiny-slider.css" />
+	  <link rel="stylesheet" href="../../assets/css/glightbox.min.css" />
+	  <link rel="stylesheet" href="../../assets/css/main.css" />
+	</h:head>
+	<h:body>
+
+	  <ui:include src="../components/modals/signIn.xhtml" />
+	  <ui:include src="../components/modals/register.xhtml" />
+
+	  <!-- Preloader -->
+	  <div class="preloader">
+		<div class="preloader-inner">
+		  <div class="preloader-icon">
+			<span></span>
+			<span></span>
+		  </div>
+		</div>
+	  </div>
+	  <!-- /End Preloader -->
+
+	  <ui:include src="../components/header/header.xhtml" />
+
+	  <ui:insert name="body" />
+
+	  <ui:include src="../components/footer.xhtml" />
+
+	  <!-- ========================= scroll-top ========================= -->
+	  <a href="#" class="scroll-top">
+		<i class="lni lni-chevron-up" />
+	  </a>
+
+	  <!-- ========================= JS here ========================= -->
+	  <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js" type="application/javascript"></script>
+	  <script src="${pageContext.request.contextPath}/assets/js/tiny-slider.js" type="application/javascript"></script>
+	  <script src="${pageContext.request.contextPath}/assets/js/glightbox.min.js" type="application/javascript"></script>
+	  <script src="${pageContext.request.contextPath}/assets/js/main.js" type="application/javascript"></script>
+
+	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js" type="application/javascript"></script>
+	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js" type="application/javascript"></script>
+
+	  <script src="${pageContext.request.contextPath}/assets/js/signIn.js" type="application/javascript"></script>
+	  <script src="${pageContext.request.contextPath}/assets/js/register.js" type="application/javascript"></script>
+
+	  <script type="text/javascript">
+          //========= Hero Slider
+          tns({
+              container: '.hero-slider',
+              slideBy: 'page',
+              autoplay: true,
+              autoplayButtonOutput: false,
+              mouseDrag: true,
+              gutter: 0,
+              items: 1,
+              nav: false,
+              controls: true,
+              controlsText: ['&lt;i class="lni lni-chevron-left">&lt;/i>', '&lt;i class="lni lni-chevron-right">&lt;/i>'],
+          });
+
+          //======== Brand Slider
+          tns({
+              container: '.brands-logo-carousel',
+              autoplay: true,
+              autoplayButtonOutput: false,
+              mouseDrag: true,
+              gutter: 15,
+              nav: false,
+              controls: false,
+              responsive: {
+                  0: {
+                      items: 1,
+                  },
+                  540: {
+                      items: 3,
+                  },
+                  768: {
+                      items: 5,
+                  },
+                  992: {
+                      items: 6,
+                  }
+              }
+          });
+	  </script>
+	  <ui:insert name="scripts" />
+	</h:body>
+</html>

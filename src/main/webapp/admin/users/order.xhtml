@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Order - #{orderService.orderID}</ui:define>
+  <ui:define name="body">
+	<f:metadata>
+	  <f:viewParam name="id" value="#{orderService.orderID}" />
+	</f:metadata>
+	<div class="container-fluid py-3">
+	  <div class="row">
+		<div class="col-5">
+		  <h4>Products bought</h4>
+		  <h6>Total: #{orderService.order.total}</h6>
+		  <div class="row">
+			<ui:repeat value="#{orderService.order.products}" var="product">
+			  <div class="col-lg-4 col-md-6 col-12">
+				<div class="single-product">
+				  <div class="product-image">
+					<h:link outcome="#{productNavigation.productDetails}">
+					  <f:param name="id" value="#{product.id}" />
+					  <h:graphicImage styleClass="item-image" url="#{product.imagePath}" alt="#{product}" />
+					</h:link>
+				  </div>
+				  <div class="product-info">
+					<span class="category">#{product.category}</span>
+					<h4 class="title">
+					  <h:link value="#{product}" outcome="#{productNavigation.productDetails}">
+						<f:param name="id" value="#{product.id}" />
+					  </h:link>
+					</h4>
+					<div class="price">
+					  <span>$#{product.price}</span>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</ui:repeat>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </ui:define>
+</ui:composition>

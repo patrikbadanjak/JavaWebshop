@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Cart</ui:define>
+  <ui:define name="body">
+	<div class="shopping-cart py-3">
+	  <div class="container">
+		<c:choose>
+		  <c:when test="#{cart.products.size() != 0}">
+			<div class="cart-list-head">
+			  <div class="cart-list-title">
+				<div class="row">
+				  <div class="col-lg-1 col-md-1 col-12">
+				  </div>
+				  <div class="col-lg-4 col-md-3 col-12">
+					<p>Product Name</p>
+				  </div>
+				  <div class="col-lg-2 col-md-2 col-12">
+					<p>Quantity</p>
+				  </div>
+				  <div class="col-lg-2 col-md-2 col-12">
+					<p>Subtotal</p>
+				  </div>
+				  <div class="col-lg-2 col-md-2 col-12">
+					<p>Discount</p>
+				  </div>
+				  <div class="col-lg-1 col-md-2 col-12">
+					<p>Remove</p>
+				  </div>
+				</div>
+			  </div>
+
+			  <ui:repeat value="#{cart.products}" var="product">
+				<div class="cart-single-list">
+				  <div class="row align-items-center">
+					<div class="col-lg-1 col-md-1 col-12">
+					  <h:link outcome="#{productNavigation.productDetails}">
+						<f:param name="id" value="#{product.id}" />
+						<h:graphicImage url="#{product.imagePath}" alt="#{product}" />
+					  </h:link>
+					</div>
+					<div class="col-lg-4 col-md-3 col-12">
+					  <h5 class="product-name">
+						<h:link value="#{product}" outcome="#{productNavigation.productDetails}">
+						  <f:param name="id" value="#{product.id}" />
+						</h:link>
+					  </h5>
+					</div>
+					<div class="col-lg-2 col-md-2 col-12">
+					  <div class="count-input">
+						<select class="form-control">
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+						</select>
+					  </div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-12">
+					  <p>$#{product.price}</p>
+					</div>
+					<div class="col-lg-2 col-md-2 col-12">
+					  <p>-</p>
+					</div>
+					<div class="col-lg-1 col-md-2 col-12">
+					  <h:form>
+						<h:commandLink styleClass="remove-item" action="#{cart.removeProductFromCart(product)}">
+						  <i class="lni lni-close" />
+						</h:commandLink>
+					  </h:form>
+					</div>
+				  </div>
+				</div>
+			  </ui:repeat>
+
+			</div>
+			<div class="row">
+			  <div class="col-12">
+				<div class="total-amount">
+				  <div class="row">
+					<div class="col-lg-8 col-md-6 col-12">
+					  <div class="left">
+						<div class="coupon">
+						  <form action="#" target="_blank">
+							<input name="Coupon" placeholder="Enter Your Coupon" />
+							<div class="button">
+							  <button class="btn">Apply Coupon</button>
+							</div>
+						  </form>
+						</div>
+					  </div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-12">
+					  <div class="right">
+						<ul>
+						  <li>Cart Subtotal<span>$#{cart.cartTotal}</span></li>
+						  <li>Shipping<span>Free</span></li>
+						  <!--					  <li>You Save<span>$29.00</span></li>-->
+						  <li class="last">You Pay<span>$#{cart.cartTotal}</span></li>
+						</ul>
+						<div class="button">
+						  <h:link value="Checkout" styleClass="btn" outcome="#{cartNavigation.getCheckout()}" />
+						  <h:link value="Continue Shopping" styleClass="btn btn-alt" outcome="#{productNavigation.getProducts()}" />
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </c:when>
+		  <c:otherwise>
+			<h3 class="text-center">Looks like your cart is empty...</h3>
+			<img class="user-select-none d-block mx-auto" style="height: 500px;" alt="Empty cart" src="../assets/media/images/stories/empty-cart.svg" />
+			<h:link styleClass="btn btn-primary d-block mx-auto" style="width: 200px;" value="Shop Now" outcome="#{productNavigation.products}" />
+		  </c:otherwise>
+		</c:choose>
+	  </div>
+	</div>
+  </ui:define>
+</ui:composition>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">#{productService.product}</ui:define>
+  <ui:define name="body">
+	<f:metadata>
+	  <f:viewParam name="id" value="#{productService.productID}" />
+	</f:metadata>
+	<div class="container-fluid">
+	  <section class="item-details section">
+		<div class="container">
+		  <div class="top-area">
+			<div class="row align-items-center">
+			  <div class="col-lg-5 col-md-12 col-12">
+				<div class="product-images">
+				  <main id="gallery">
+					<div class="main-img">
+					  <h:graphicImage style="height: 450px;aspect-ratio: 1/1;" url="#{productService.product.imagePath}" />
+					</div>
+				  </main>
+				</div>
+			  </div>
+			  <div class="col-lg-7 col-md-12 col-12">
+				<div class="product-info">
+				  <h2 class="title">#{productService.product}</h2>
+				  <p class="category"><i class="lni lni-tag" />Category:
+					<h:link value="#{productService.product.category}" outcome="#{productNavigation.productsForCategory}">
+					  <f:param value="#{productService.product.category.id}" />
+					</h:link>
+				  </p>
+				  <h3 class="price">$#{productService.product.price}</h3>
+				  <p class="info-text" />
+				  <div class="row">
+					<div class="col-lg-4 col-md-4 col-12">
+					  <div class="form-group quantity">
+						<label for="txtQuantity">Quantity</label>
+						<input id="txtQuantity" class="form-control" type="number" value="1" min="1" max="10" />
+					  </div>
+					</div>
+				  </div>
+				  <div class="bottom-content">
+					<div class="row align-items-end">
+					  <div class="col-lg-4 col-md-4 col-12">
+						<div class="button cart-button">
+						  <h:form>
+							<h:commandLink styleClass="btn btn-primary w-100" value="Add to Cart" action="#{cart.addProductToCart(productService.product)}" />
+						  </h:form>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="product-details-info">
+			<div class="single-block">
+			  <div class="row">
+				<div class="col-lg-6 col-12">
+				  <div class="info-body custom-responsive-margin">
+					<h4>Description</h4>
+					<p>#{productService.product.description}</p>
+				  </div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</div>
+	  </section>
+	</div>
+  </ui:define>
+</ui:composition>

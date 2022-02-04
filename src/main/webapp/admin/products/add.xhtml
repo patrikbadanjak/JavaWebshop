@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Add new product</ui:define>
+  <ui:define name="body">
+	<div class="container-fluid my-3 w-75">
+	  <h1 class="display-4 text-center mb-3">Add new product</h1>
+	  <h:form enctype="multipart/form-data" prependId="false">
+		<div class="row">
+		  <div class="mb-3 col-3">
+			<h:graphicImage url="#{productService.product.imagePath}" />
+		  </div>
+		  <div class="mb-3 col-9">
+			<div class="mb-3">
+			  <label class="form-label">Brand</label>
+			  <h:inputText value="#{productService.product.brand.name}" styleClass="form-control" />
+			</div>
+			<div class="mb-3">
+			  <label class="form-label">Product name</label>
+			  <h:inputText value="#{productService.product.product}" styleClass="form-control" />
+			</div>
+			<div class="mb-3">
+			  <label class="form-label">Price</label>
+			  <h:inputText value="#{productService.product.price}" styleClass="form-control" />
+			</div>
+		  </div>
+		</div>
+		<div class="mb-3">
+		  <label class="form-label">Description</label>
+		  <h:inputText value="#{productService.product.description}" styleClass="form-control" />
+		</div>
+		<div class="mb-3">
+		  <label class="form-label">Category</label>
+		  <h:inputText value="#{productService.product.category.name}" styleClass="form-control" />
+		</div>
+		<div class="mb-3">
+		  <div class="row">
+			<label class="form-label">Image</label>
+			<div class="col-10">
+			  <h:inputFile disabled="true" value="#{imageUpload.uploadedImage}" styleClass="form-control mb-3" />
+			</div>
+			<h:commandButton styleClass="btn btn-dark col-2 h-50" value="Upload" action="#{imageUpload.saveFile}" />
+		  </div>
+		  <h:outputText value="#{imageUpload.message}" styleClass="text-info" />
+		</div>
+		<div>
+		  <h:commandLink
+				  value="Save"
+				  styleClass="btn btn-primary"
+				  action="#{adminNavigation.getProducts()}"
+				  actionListener="#{productService.addNewProduct}" />
+		</div>
+		<h:messages styleClass="text-danger" />
+	  </h:form>
+	</div>
+  </ui:define>
+</ui:composition>

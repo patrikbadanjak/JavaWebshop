@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Checkout</ui:define>
+  <ui:define name="body">
+	<section class="checkout-wrapper section">
+	  <h:form>
+		<div class="container">
+		  <div class="row justify-content-center">
+			<div class="col-lg-8">
+			  <div class="checkout-steps-form-style-1">
+				<ul id="accordionExample">
+				  <li>
+					<h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Your Personal Details </h6>
+					<section class="checkout-steps-form-content collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+					  <div class="row">
+						<div class="col-md-12">
+						  <div class="single-form form-default">
+							<div class="row">
+							  <div class="col-md-6 form-input form">
+								<label class="form-label" for="txtPersonalFirstName">First Name</label>
+								<h:inputText
+								   id="txtPersonalFirstName"
+								   styleClass="form-control"
+								   required="true"
+								   requiredMessage="Please enter your first name"
+								   value="#{checkout.customerDetails.firstName}" />
+							  </div>
+							  <div class="col-md-6 form-input form">
+								<label class="form-label" for="txtPersonalLastName">Last Name</label>
+								<h:inputText
+								   id="txtPersonalLastName"
+								   styleClass="form-control"
+								   required="true"
+								   requiredMessage="Please enter your last name"
+								   value="#{checkout.customerDetails.lastName}" />
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalEmail">Email Address</label>
+							  <h:inputText
+								  id="txtPersonalEmail"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter your email address"
+								  value="#{checkout.customerDetails.email}">
+								<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							  </h:inputText>
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalPhoneNumber">Phone Number</label>
+							  <h:inputText
+								  id="txtPersonalPhoneNumber"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter your phone number"
+								  value="#{checkout.customerDetails.phoneNumber}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalCity">Street Address</label>
+							  <h:inputText
+								  id="txtPersonalStreet"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter the street address"
+								  value="#{checkout.customerDetails.street}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalCity">City</label>
+							  <h:inputText
+								  id="txtPersonalCity"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter the name of the city you live in"
+								  value="#{checkout.customerDetails.city}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalPostCode">Post Code</label>
+							  <h:inputText
+								  id="txtPersonalPostCode"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter your post code"
+								  value="#{checkout.customerDetails.postCode}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalCountry">Country</label>
+							  <h:inputText
+								  id="txtPersonalCountry"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter your country"
+								  value="#{checkout.customerDetails.country}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-6">
+						  <div class="single-form form-default">
+							<div class="form-input form">
+							  <label class="form-label" for="txtPersonalState">Region/State</label>
+							  <h:inputText
+								  id="txtPersonalState"
+								  styleClass="form-control"
+								  required="true"
+								  requiredMessage="Please enter your state/region"
+								  value="#{checkout.customerDetails.state}" />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-12 mt-3">
+						  <div class="form-check">
+							<h:selectBooleanCheckbox styleClass="form-check-input" id="cbDelivery" value="#{checkout.areDeliveryAndCustomerAddressEqual}" />
+							<label class="form-check-label" for="cbDelivery">My delivery address is same as my personal address.</label>
+						  </div>
+						</div>
+						<div class="col-md-12">
+						  <div class="single-form button">
+							<button onclick="return false;" class="btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">next
+							  step</button>
+						  </div>
+						</div>
+					  </div>
+					</section>
+				  </li>
+				  <li>
+					<h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Shipping Address</h6>
+					<section class="checkout-steps-form-content collapse" id="collapseFour" aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
+					<div class="row">
+					  <div class="col-md-12">
+						<div class="single-form form-default">
+						  <div class="row">
+							<div class="col-md-6 form-input form">
+							  <label for="txtDeliveryFirstName">First Name</label>
+							  <h:inputText
+									  id="txtDeliveryFirstName"
+									  required="true"
+									  requiredMessage="Please enter your first name"
+									  value="#{checkout.deliveryDetails.firstName}" />
+							</div>
+							<div class="col-md-6 form-input form">
+							  <label for="txtDeliveryLastName">Last Name</label>
+							  <h:inputText
+									  id="txtDeliveryLastName"
+									  required="true"
+									  requiredMessage="Please enter your last name"
+									  value="#{checkout.deliveryDetails.lastName}" />
+							</div>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryEmail">Email Address</label>
+							<h:inputText
+									id="txtDeliveryEmail"
+									required="true"
+									requiredMessage="Please enter your email address"
+									value="#{checkout.deliveryDetails.email}">
+							  <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							</h:inputText>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryPhoneNumber">Phone Number</label>
+							<h:inputText
+									id="txtDeliveryPhoneNumber"
+									required="true"
+									requiredMessage="Please enter your phone number"
+									value="#{checkout.deliveryDetails.phoneNumber}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryStreetAddress">Street Address</label>
+							<h:inputText
+									id="txtDeliveryStreetAddress"
+									required="true"
+									requiredMessage="Please enter your street address"
+									value="#{checkout.deliveryDetails.street}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryCity">City</label>
+							<h:inputText
+									id="txtDeliveryCity"
+									required="true"
+									requiredMessage="Please enter the name of the city you live in"
+									value="#{checkout.deliveryDetails.city}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryPostCode">Post Code</label>
+							<h:inputText
+									id="txtDeliveryPostCode"
+									required="true"
+									requiredMessage="Please enter your post code"
+									value="#{checkout.deliveryDetails.postCode}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryCountry">Country</label>
+							<h:inputText
+									id="txtDeliveryCountry"
+									required="true"
+									requiredMessage="Please enter your country"
+									value="#{checkout.deliveryDetails.country}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-6">
+						<div class="single-form form-default">
+						  <div class="form-input form">
+							<label for="txtDeliveryState">Region/State</label>
+							<h:inputText
+									id="txtDeliveryState"
+									required="true"
+									requiredMessage="Please enter your state/region"
+									value="#{checkout.deliveryDetails.state}" />
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-12">
+						<div class="checkout-payment-option">
+						  <h6 class="heading-6 font-weight-400 payment-title">
+							Select Delivery Option
+						  </h6>
+						  <div class="payment-option-wrapper">
+							<div class="single-payment-option">
+							  <h:selectOneRadio value="#{checkout.deliveryOptions}">
+								<f:selectItems
+									id="shipping-1"
+									value="#{deliveryOptionsWrapper.deliveryOptions}"
+									var="deliveryOptions"
+									itemValue="#{deliveryOptions}"
+									itemLabel="#{deliveryOptions.label}"
+								/>
+							  </h:selectOneRadio>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-12">
+						<div class="steps-form-btn button">
+						  <button onclick="return false;" class="btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">previous</button>
+						  <button onclick="return false;" class="btn btn-alt" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Save &amp; Continue</button>
+						</div>
+					  </div>
+					  </div>
+					</section>
+				  </li>
+				  <li>
+					<h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Payment Info</h6>
+					<section class="checkout-steps-form-content collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordionExample" style="">
+					  <div class="row">
+						<div class="col-md-12">
+						  <div class="checkout-payment-option">
+							<h6 class="heading-6 font-weight-400 payment-title">
+							  Select Payment Option
+							</h6>
+							<div class="payment-option-wrapper">
+							  <div class="single-payment-option">
+								<h:selectOneRadio value="#{checkout.paymentOptions}">
+								  <f:selectItems
+									  value="#{paymentOptionsWrapper.paymentOptions}"
+									  var="paymentOption"
+									  itemValue="#{paymentOption}"
+									  itemLabel="#{paymentOption.label}"
+								  />
+								</h:selectOneRadio>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</section>
+				  </li>
+				</ul>
+				<h:messages />
+			  </div>
+			</div>
+			<div class="col-lg-4">
+			  <div class="checkout-sidebar">
+				<div class="checkout-sidebar-price-table mt-30">
+				  <h5 class="title">Summary</h5>
+				  <div class="sub-total-price">
+					<div class="total-price">
+					  <p class="value">Subotal Price:</p>
+					  <p class="price">$#{cart.cartTotal}</p>
+					</div>
+					<div class="total-price shipping">
+					  <p class="value">Discount:</p>
+					  <p class="price">-</p>
+					</div>
+					<div class="total-price discount">
+					  <p class="value">Delivery:</p>
+					  <p class="price">Free</p>
+					</div>
+				  </div>
+				  <div class="total-payable">
+					<div class="payable-price">
+					  <p class="value">Total:</p>
+					  <p class="price">$#{cart.cartTotal}</p>
+					</div>
+				  </div>
+				  <div class="price-table-btn button">
+					<h:commandLink
+						value="Checkout"
+						styleClass="btn btn-alt"
+						action="#{cartNavigation.getCheckoutSuccessful()}"
+						actionListener="#{checkout.completeCheckout}" />
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </h:form>
+	</section>
+  </ui:define>
+</ui:composition>

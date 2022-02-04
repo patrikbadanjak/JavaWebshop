@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">Products</ui:define>
+  <ui:define name="body">
+	<f:metadata>
+	  <f:viewParam name="id" value="#{productService.categoryID}" />
+	</f:metadata>
+	<section class="product-grids section">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-9 col-12">
+			<div class="product-grids-head">
+			  <div class="product-grid-topbar">
+				<div class="row align-items-center">
+				  <div class="col-lg-7 col-md-8 col-12">
+					<div class="product-sorting">
+					  <label for="sorting">Sort by:</label>
+					  <select class="form-control" id="sorting">
+						<option>Popularity</option>
+						<option>Low - High Price</option>
+						<option>High - Low Price</option>
+						<option>Average Rating</option>
+						<option>A - Z Order</option>
+						<option>Z - A Order</option>
+					  </select>
+					  <h3 class="total-show-product">Showing: <span>1 - 12 items</span></h3>
+					</div>
+				  </div>
+				  <div class="col-lg-5 col-md-4 col-12">
+				  </div>
+				</div>
+			  </div>
+			  <div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade active show" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+				  <div class="row">
+					<ui:repeat value="#{productRepositoryImpl.getProductsForCategory(productService.categoryID)}" var="product">
+					  <div class="col-lg-4 col-md-6 col-12">
+						<div class="single-product">
+						  <div class="product-image">
+							<h:link outcome="#{productNavigation.productDetails}">
+							  <f:param name="id" value="#{product.id}" />
+							  <h:graphicImage styleClass="item-image" url="#{product.imagePath}" alt="#{product}" />
+							</h:link>
+							<div class="button">
+							  <h:form>
+								<h:commandLink action="#{cart.addProductToCart(product)}" styleClass="btn">
+								  <i class="lni lni-cart" /> Add to Cart
+								</h:commandLink>
+							  </h:form>
+							</div>
+						  </div>
+						  <div class="product-info">
+							<span class="category">#{product.category}</span>
+							<h4 class="title">
+							  <h:link value="#{product}" outcome="#{productNavigation.productDetails}">
+								<f:param name="id" value="#{product.id}" />
+							  </h:link>
+							</h4>
+							<ul class="review">
+							  <li><i class="lni lni-star" /></li>
+							  <li><i class="lni lni-star" /></li>
+							  <li><i class="lni lni-star" /></li>
+							  <li><i class="lni lni-star" /></li>
+							  <li><i class="lni lni-star" /></li>
+							  <li><span>0 Review(s)</span></li>
+							</ul>
+							<div class="price">
+							  <span>$#{product.price}</span>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</ui:repeat>
+				  </div>
+				  <div class="row">
+					<div class="col-12">
+					  <div class="pagination left">
+						<ul class="pagination-list">
+						  <li class="active"><a href="javascript:void(0)">1</a></li>
+						  <li><a href="javascript:void(0)">2</a></li>
+						  <li><a href="javascript:void(0)">3</a></li>
+						  <li><a href="javascript:void(0)">4</a></li>
+						  <li><a href="javascript:void(0)"><i class="lni lni-chevron-right" /></a></li>
+						</ul>
+					  </div>
+
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</section>
+  </ui:define>
+</ui:composition>

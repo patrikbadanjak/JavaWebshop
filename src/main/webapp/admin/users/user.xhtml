@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+		template="../../WEB-INF/templates/main.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <ui:define name="title">User - #{userService.user}</ui:define>
+  <ui:define name="body">
+	<f:metadata>
+	  <f:viewParam name="id" value="#{userService.userID}" />
+	</f:metadata>
+	<div class="container-fluid py-3">
+	  <div class="row">
+		<div class="col-5">
+		  <div class="mb-3">
+			<label>User ID:</label>
+			<p>#{userService.user.uid}</p>
+		  </div>
+		  <div class="mb-3">
+			<label>Display name:</label>
+			<p>#{userService.user.displayName}</p>
+		  </div>
+		  <div class="mb-3">
+			<label>Email:</label>
+			<p>#{userService.user.email}</p>
+		  </div>
+		  <div class="mb-3">
+			<label>Account created:</label>
+			<p>#{userService.user.accountCreationDate}</p>
+		  </div>
+		  <div class="mb-3">
+			<label>Last sign in:</label>
+			<p>#{userService.user.lastSignIn}</p>
+		  </div>
+		  <h:dataTable styleClass="table table-striped align-middle" value="#{userService.userOrders}" var="order">
+			<h:column>
+			  <f:facet name="header">Date ordered:</f:facet>
+			  #{order.orderDate}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">User details:</f:facet>
+			  #{order.userDetails}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Delivery address:</f:facet>
+			  #{order.deliveryAddress}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Payment method:</f:facet>
+			  #{order.paymentMethod}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Total:</f:facet>
+			  #{order.total}
+			</h:column>
+			<h:column>
+			  <f:facet name="header">Action</f:facet>
+			  <h:link styleClass="btn btn-info" value="More details" outcome="#{adminNavigation.orderData}">
+				<f:param name="id" value="#{order.orderID}" />
+			  </h:link>
+			</h:column>
+		  </h:dataTable>
+		</div>
+	  </div>
+	</div>
+  </ui:define>
+</ui:composition>
